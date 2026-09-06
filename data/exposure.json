@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "note": "This is a modelled upper-bound reference, not a loss forecast, not a fine estimate and not legal advice. It answers one question only: if every unmet obligation in scope were enforced at its statutory ceiling, what order of magnitude is on the table. Voluntary frameworks carry no ceiling, which is deliberate - it separates gaps with statutory teeth from gaps that are posture only.",
+  "method": "For each system, for each penalty class engaged, exposure = ceiling x unmet share of that class's applicable requirements, where unmet share is 1 minus the evidence coverage of the controls satisfying them. Summed across systems.",
+  "penalty_classes": [
+    {"id":"euaia_prohibited","label":"Prohibited practice","ceiling_eur":35000000,"turnover_pct":7,
+     "cite":"AI Act Art. 99(3) - up to EUR 35 000 000 or 7% of total worldwide annual turnover, whichever is higher",
+     "requirements":["EUAIA-5"]},
+    {"id":"euaia_obligations","label":"High-risk and operator obligations","ceiling_eur":15000000,"turnover_pct":3,
+     "cite":"AI Act Art. 99(4) - up to EUR 15 000 000 or 3% of total worldwide annual turnover, whichever is higher",
+     "requirements":["EUAIA-4","EUAIA-6","EUAIA-9","EUAIA-10","EUAIA-11","EUAIA-12","EUAIA-13","EUAIA-14","EUAIA-15","EUAIA-17","EUAIA-26","EUAIA-27","EUAIA-43","EUAIA-49","EUAIA-50","EUAIA-53","EUAIA-72","EUAIA-73","EUAIA-86"]},
+    {"id":"gdpr_core","label":"Data subject rights and processing principles","ceiling_eur":20000000,"turnover_pct":4,
+     "cite":"GDPR Art. 83(5) - up to EUR 20 000 000 or 4% of total worldwide annual turnover, whichever is higher",
+     "requirements":["GDPR-5","GDPR-6","GDPR-9","GDPR-13","GDPR-15","GDPR-22","GDPR-44"]},
+    {"id":"gdpr_controller","label":"Controller and processor obligations","ceiling_eur":10000000,"turnover_pct":2,
+     "cite":"GDPR Art. 83(4) - up to EUR 10 000 000 or 2% of total worldwide annual turnover, whichever is higher",
+     "requirements":["GDPR-25","GDPR-30","GDPR-32","GDPR-35"]},
+    {"id":"voluntary","label":"Voluntary framework - no statutory penalty","ceiling_eur":0,"turnover_pct":0,
+     "cite":"ISO/IEC 42001 and the NIST AI RMF are voluntary. Gaps here carry assurance, contractual and certification consequences, not administrative fines.",
+     "requirements":["ISO42001-5.2","ISO42001-6.1.4","ISO42001-A.2","ISO42001-A.3","ISO42001-A.4","ISO42001-A.5","ISO42001-A.6","ISO42001-A.7","ISO42001-A.8","ISO42001-A.9","ISO42001-A.10","NIST-GOVERN-1.1","NIST-GOVERN-2.1","NIST-GOVERN-4.1","NIST-GOVERN-6.1","NIST-MAP-1.1","NIST-MAP-2.3","NIST-MAP-5.1","NIST-MEASURE-2.3","NIST-MEASURE-2.7","NIST-MEASURE-2.11","NIST-MEASURE-3.1","NIST-MANAGE-2.2","NIST-MANAGE-4.1","NIST-MANAGE-4.3"]}
+  ]
+}
