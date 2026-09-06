@@ -21,6 +21,7 @@ jobs:
           for f in engine.js views.js report.js app.js; do
             node -e "new Function(require('fs').readFileSync('docs/$f','utf8'))" || exit 1
           done
+          node -e "new Function(require('fs').readFileSync('docs/live/live.js','utf8'))"
 
   browser:
     runs-on: ubuntu-latest
@@ -37,3 +38,5 @@ jobs:
           for i in $(seq 1 20); do curl -sf http://127.0.0.1:8813/ >/dev/null && break; sleep 0.5; done
       - name: Headless assertions, including an independent recomputation of the maths
         run: node tests/assert.mjs http://127.0.0.1:8813/
+      - name: The operator console registers, derives, persists and deletes
+        run: node tests/assert-live.mjs http://127.0.0.1:8813/

@@ -3,27 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>AI Risk Control Room</title>
-<meta name="description" content="A control room for AI governance: an AI system inventory assessed against the EU AI Act, GDPR, ISO/IEC 42001 and the NIST AI RMF, with an evidence trail behind every score, a regulatory crosswalk, a risk heatmap and a board view.">
+<title>AI Risk Control Room - live console</title>
+<meta name="description" content="Register your own AI systems, record the evidence behind each control, and get the obligations, risk map, exposure and board pack derived live. Runs in your browser; your inventory never leaves it.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20rx%3D%277%27%20fill%3D%27%230b0f14%27%2F%3E%3Cpath%20d%3D%27M16%204.5l9.5%204.2v7.1c0%206.3-4%2010.1-9.5%2011.7C10.5%2025.9%206.5%2022.1%206.5%2015.8V8.7z%27%20fill%3D%27none%27%20stroke%3D%27%2338bdf8%27%20stroke-width%3D%272.2%27%20stroke-linejoin%3D%27round%27%2F%3E%3Ccircle%20cx%3D%2716%27%20cy%3D%2716%27%20r%3D%272.6%27%20fill%3D%27%2338bdf8%27%2F%3E%3C%2Fsvg%3E">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="live.css">
 </head>
 <body>
+
+<div id="boot" class="boot">
+  <div class="bootwrap">
+    <pre id="bootlog" class="bootlog" aria-live="polite"></pre>
+    <p class="bootskip">press any key to skip</p>
+  </div>
+</div>
+
+<div id="shell" class="hidden">
 <header>
   <div class="wrap bar">
     <div class="id">
-      <div class="live"><span class="dot"></span>LIVE</div>
+      <div class="live"><span class="dot"></span>OPERATOR CONSOLE</div>
       <h1>AI Risk Control Room</h1>
       <p class="org" id="org">loading&hellip;</p>
     </div>
     <a class="brand" href="https://github.com/Jeevan-0508" target="_blank" rel="noopener"
-       title="Jeevan Siddhabhaktula - Risk. Governance. AI."><img src="jk-logo.png" alt="JK" width="42" height="42"></a>
+       title="Jeevan Siddhabhaktula - Risk. Governance. AI."><img src="../jk-logo.png" alt="JK" width="42" height="42"></a>
   </div>
   <nav class="wrap" id="nav">
     <button data-view="room" class="on">Control room</button>
     <button data-view="systems">Systems</button>
     <button data-view="crosswalk">Crosswalk</button>
-    <button data-view="incidents">Incidents</button>
     <button data-view="board">Board view</button>
     <button data-view="method">Method</button>
   </nav>
@@ -31,13 +40,15 @@
 
 <main class="wrap">
   <div id="err" class="err" hidden></div>
-  <p class="demo" id="demo">
-    <b>Synthetic demonstration portfolio.</b> Meridian Group is fictional. Every number below is
-    recomputed in your browser from the published model files - nothing is hard-coded, nothing is
-    transmitted. The exposure figure is a modelled upper bound against statutory ceilings, not a
-    fine estimate, and none of this is legal advice.
-    <a href="live/">Open the live console and build your own inventory &rarr;</a>
+  <p class="demo" id="privacy">
+    <b>This is your console.</b> The inventory you build here is held in this browser only
+    &mdash; there is no server and nothing is transmitted. Export it to JSON to keep it or move it.
+    The regulatory model, controls and taxonomy are loaded from the published data files.
+    <a href="../">Open the read-only demonstration portfolio instead &rarr;</a>
   </p>
+
+  <div class="filters" id="toolbar"></div>
+  <div id="dialog"></div>
   <section id="view"></section>
 </main>
 
@@ -45,12 +56,13 @@
   <p>Model: <span id="counts"></span></p>
   <p>Built by <a href="https://github.com/Jeevan-0508" target="_blank" rel="noopener">Jeevan Siddhabhaktula</a>
      &middot; <a href="https://github.com/Jeevan-0508/ai-governance-control-room" target="_blank" rel="noopener">source and data</a>
-     &middot; MIT for the code, CC BY 4.0 for the control and requirement model.</p>
+     &middot; not legal advice.</p>
 </footer>
+</div>
 
-<script src="engine.js"></script>
-<script src="views.js"></script>
-<script src="report.js"></script>
-<script src="app.js"></script>
+<script src="../engine.js"></script>
+<script src="../views.js"></script>
+<script src="../report.js"></script>
+<script src="live.js"></script>
 </body>
 </html>

@@ -137,10 +137,12 @@
           var r = m.reqById[w.requirement];
           return esc(r.ref) + ' ' + esc(r.title) + ' &mdash; ' + pct(w.score) + ' across ' + w.systems + ' systems';
         }).join('<br>') + '</div>');
-      } else {
+      } else if (p.weakest.length) {
         var w0 = p.weakest[0];
         h.push('<div class="why">weakest: ' + esc(m.reqById[w0.requirement].ref) + ' ' +
           esc(m.reqById[w0.requirement].title) + ' at ' + pct(w0.score) + '</div>');
+      } else {
+        h.push('<div class="why">no system in scope engages this framework yet</div>');
       }
       h.push('</div>');
     });
@@ -410,6 +412,10 @@
   /* ---------- board view ---------- */
   function board(m, st) {
     var k = m.kpis(), hist = m.history();
+    if (!hist.length) {
+      hist = [{ month: m.portfolio.as_of.slice(0, 7), coverage: k.coverage, exposure: k.exposure,
+                openGaps: k.openGaps }];
+    }
     var first = hist[0], last = hist[hist.length - 1];
     var delta = last.exposure - first.exposure;
     var rem = m.remediation().slice(0, 3);
@@ -421,7 +427,7 @@
     var unowned = m.activeSystems().filter(function (s) {
       return m.tierRank(s) >= 3 && m.controlCoverage(s.id, 'C-04').score < 0.5;
     }).length;
-    var maxc = Math.max.apply(null, hist.map(function (p) { return p.coverage; }));
+    var maxc = Math.max.apply(null, hist.map(function (p) { return p.coverage; })) || 1;
     var h = [];
     h.push('<div class="filters noprint"><button class="ghost" data-act="print">Print / save as PDF</button>' +
       '<button class="ghost" data-act="export-board">Export board pack (.md)</button>' +
@@ -448,7 +454,8 @@
 
     h.push('<p class="bl"><b>Direction.</b> The exposure reference has moved from ' + eur(first.exposure) +
       ' in ' + esc(first.month) + ' to ' + eur(last.exposure) + ' in ' + esc(last.month) + ', a ' +
-      Math.abs(Math.round(delta / first.exposure * 100)) + '% ' + (delta < 0 ? 'reduction' : 'increase') +
+      (first.exposure ? Math.abs(Math.round(delta / first.exposure * 100)) + '% ' +
+        (delta < 0 ? 'reduction' : 'increase') : 'flat position') +
       ', on the back of ' + num(m.portfolio.evidence.filter(function (e) { return e.status !== 'missing'; }).length) +
       ' artefacts now asserted. Open gaps fell from ' + first.openGaps + ' to ' + last.openGaps +
       '. On this trajectory the remaining gap closes in outline, not in the tiers that matter most.</p>');
@@ -459,7 +466,7 @@
     }).join('') + '</div><div class="k" style="font:700 9.5px var(--mono);letter-spacing:.13em;color:var(--faint);margin-top:8px">' +
       'CONTROL COVERAGE ' + esc(first.month) + ' \u2192 ' + esc(last.month) + ', RISING</div></div>');
     h.push('<div><div class="spark">' + hist.map(function (p) {
-      return '<i style="height:' + Math.round(p.exposure / first.exposure * 100) +
+      return '<i style="height:' + Math.round(first.exposure ? p.exposure / first.exposure * 100 : 2) +
         '%;background:var(--l4)" title="' + p.month + ' ' + eur(p.exposure) + '"></i>';
     }).join('') + '</div><div class="k" style="font:700 9.5px var(--mono);letter-spacing:.13em;color:var(--faint);margin-top:8px">' +
       'EXPOSURE REFERENCE, FALLING</div></div></div>');

@@ -1,0 +1,58 @@
+/* Boot sequence and the operator-console additions. The rest of the styling is shared with the
+   demonstration site so both look like the same instrument. */
+.hidden{display:none}
+
+.boot{position:fixed;inset:0;background:#05080c;display:grid;place-items:center;z-index:50;
+  cursor:pointer;padding:22px}
+.boot::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(180deg,rgba(56,189,248,.045) 0 1px,transparent 1px 3px)}
+.boot.out{animation:bootout .5s ease forwards}
+@keyframes bootout{to{opacity:0;visibility:hidden}}
+.bootwrap{width:100%;max-width:720px}
+.bootlog{font:13px/1.75 var(--mono);color:#7ee0a1;margin:0;white-space:pre-wrap;
+  text-shadow:0 0 12px rgba(126,224,161,.35);min-height:44vh}
+.bootlog b{color:var(--accent);font-weight:400;text-shadow:0 0 14px rgba(56,189,248,.5)}
+.bootlog i{font-style:normal;color:#5b6b82}
+.bootlog u{text-decoration:none;color:#e4eaf3}
+.bootlog .cur{background:#7ee0a1;color:#05080c;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.bootskip{font:10px/1 var(--mono);letter-spacing:.2em;color:#2f3d50;text-transform:uppercase;margin:26px 0 0}
+@media(prefers-reduced-motion:reduce){.boot::after{display:none}}
+
+/* operator toolbar */
+#toolbar:empty{display:none}
+.pill{font:700 9.5px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+  border:1px solid var(--line);border-radius:999px;padding:6px 10px}
+.pill b{color:var(--ink);font-weight:700}
+
+/* register / edit form */
+.dlg{background:var(--panel);border:1px solid var(--accent);border-radius:11px;padding:18px 20px;margin-bottom:16px}
+.dlg h3{margin:0 0 4px;font-size:17px}
+.dlg .lead{color:var(--faint);font-size:12.5px;margin:0 0 16px}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font:700 9.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.field input,.field select{background:var(--panel2);border:1px solid var(--line);color:var(--ink);
+  border-radius:7px;padding:9px 10px;font:13px inherit}
+.field input:focus,.field select:focus{outline:none;border-color:var(--accent)}
+.field .note{font-size:11px;color:var(--faint)}
+.wide{grid-column:1/-1}
+.flagbox{display:flex;flex-wrap:wrap;gap:7px}
+.flagbox label{display:inline-flex;align-items:center;gap:6px;background:var(--panel2);
+  border:1px solid var(--line);border-radius:999px;padding:7px 12px;font:12px inherit;
+  text-transform:none;letter-spacing:0;color:var(--dim);cursor:pointer}
+.flagbox label:has(input:checked){border-color:var(--purple);color:var(--ink)}
+.flagbox input{accent-color:var(--purple)}
+.derived{background:var(--panel2);border-left:2px solid var(--accent);border-radius:0 7px 7px 0;
+  padding:11px 13px;font-size:12.5px;color:var(--dim);margin:14px 0 0}
+.derived b{color:var(--ink)}
+.dlgbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
+button.danger{background:#1a0d0d;border:1px solid #4d1c1c;color:#fca5a5;border-radius:7px;
+  padding:8px 13px;font-size:12.5px;cursor:pointer}
+button.danger:hover{border-color:var(--l4);color:#fff}
+
+/* empty state */
+.empty{background:var(--panel);border:1px dashed var(--line);border-radius:11px;padding:34px 26px;text-align:center}
+.empty h3{margin:0 0 8px;font-size:19px}
+.empty p{color:var(--dim);max-width:62ch;margin:0 auto 8px;font-size:13.5px}
+.empty .bar{justify-content:center;margin-top:18px;display:flex;gap:8px;flex-wrap:wrap;padding:0}

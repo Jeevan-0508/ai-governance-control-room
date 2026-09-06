@@ -7,10 +7,15 @@ obligations each one attracts under the **EU AI Act, GDPR, ISO/IEC 42001 and the
 tracks the evidence behind every control, and reports the result as risk, gaps, exposure and a
 board pack.
 
-**Live tool: https://jeevan-0508.github.io/ai-governance-control-room/**
+**Two live pages, same engine:**
+
+| | What it is |
+|---|---|
+| **[Demo control room](https://jeevan-0508.github.io/ai-governance-control-room/)** | A fictional 27-system organisation, already populated. Read the instrument at full scale. |
+| **[Operator console](https://jeevan-0508.github.io/ai-governance-control-room/docs/live/)** | Empty. Register **your own** AI systems, record evidence, export the inventory as JSON. Saved in your browser only. |
 
 It runs entirely in the browser against published JSON. No server, no account, no telemetry, and
-no dependencies — four local scripts and one stylesheet.
+no dependencies — five local scripts and two stylesheets.
 
 ![The control room: portfolio KPIs, risk map and framework posture](docs/screenshots/1-control-room.png)
 
@@ -149,7 +154,9 @@ Change the model, then:
 ```bash
 python scripts/seed_portfolio.py                 # regenerate the demo portfolio
 python scripts/validate_model.py --sync          # check every cross-reference, refresh docs/ copies
-npm install puppeteer && node tests/assert.mjs http://127.0.0.1:8813/
+npm install puppeteer
+node tests/assert.mjs      http://127.0.0.1:8813/   # the demo control room
+node tests/assert-live.mjs http://127.0.0.1:8813/   # the operator console
 ```
 
 ## Tests
@@ -161,6 +168,12 @@ JSON inside the test file, with no engine code involved**, and compared with wha
 A rendering that quietly disagrees with the model fails the build. It also checks the filters, the
 live recompute after an evidence edit, the localStorage override, the disclaimers, zero console
 errors, and no horizontal overflow at 360 / 390 / 412 px.
+
+`tests/assert-live.mjs` runs **36 assertions** against the operator console, driving it the way a
+person does: boot, register a system from an empty inventory, check that the derived tier, legal
+basis and requirement count match an independent recomputation, record an evidence artefact, reload
+the page to prove it persisted, walk every view on a one-system portfolio, delete the system, load
+the example organisation, and check 360 / 390 px for overflow.
 
 `tests/screenshots.mjs` regenerates the images in this README from the live page, so they cannot
 show a UI that no longer exists.
