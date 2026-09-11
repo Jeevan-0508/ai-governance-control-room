@@ -1,0 +1,55 @@
+name: figures
+
+# Recounts every number the README claims against the data that backs it and
+# reports drift in one issue. It never rewrites the README - a hand-written
+# sentence can say things a plain number can't, so a human decides the edit.
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: figures
+  cancel-in-progress: true
+
+jobs:
+  figures:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Recount the README's figures against the data
+        run: python scripts/check_figures.py
+
+      - name: Raise or update the single figures issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          title="README figures drift"
+          gh label create figures --color fbca04 \
+            --description "Automated drift check between the README and the data" 2>/dev/null || true
+          existing=$(gh issue list --label figures --state open \
+            --json number --jq '.[0].number // empty')
+
+          if grep -q '^No drift' findings.md; then
+            if [ -n "$existing" ]; then
+              gh issue comment "$existing" --body "Clean run — no drift. Closing."
+              gh issue close "$existing"
+            fi
+            exit 0
+          fi
+
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --title "$title" --body-file findings.md
+          else
+            gh issue create --title "$title" --label figures --body-file findings.md
+          fi
