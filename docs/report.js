@@ -139,11 +139,20 @@
 
   function assessmentJson(m) {
     return JSON.stringify({
+      schema_version: 'ai-governance-assessment.v1',
       generated: new Date().toISOString(),
       generator: 'AI Risk Control Room',
       organisation: m.portfolio.organisation,
       as_of: m.portfolio.as_of,
       synthetic: !!m.portfolio.synthetic,
+      data_class: m.portfolio.synthetic ? 'synthetic_fixture' : 'operator_self_report',
+      review_status: 'unreviewed',
+      legal_status: 'not_determined',
+      framework_sources: m.frameworks.map(function (f) {
+        return { id: f.id, name: f.name, citation: f.citation, source_url: f.url,
+          text_kind: 'curated_interpretation', currency: 'not_checked_at_export',
+          requirements: f.requirements.map(function (r) { return { id: r.id, reference: r.ref, title: r.title }; }) };
+      }),
       method: 'Coverage is evidence-weighted (present 1, partial 0.5, missing 0). Exposure is a modelled ' +
         'upper bound against statutory ceilings scaled by unmet obligations. This is not a compliance opinion.',
       kpis: m.kpis(),
