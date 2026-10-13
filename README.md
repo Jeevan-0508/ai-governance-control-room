@@ -6,6 +6,8 @@
   <a href="https://jeevan-0508.github.io/ai-governance-control-room/">Open the demo</a> ·
   <a href="https://jeevan-0508.github.io/ai-governance-control-room/docs/live/">Open the operator console</a> ·
   <a href="#product-tour">Product tour</a> ·
+  <a href="docs/architecture.md">Architecture</a> ·
+  <a href="docs/getting-started.md">Technical docs</a> ·
   <a href="#run-locally">Run locally</a>
 </p>
 
