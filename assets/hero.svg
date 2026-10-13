@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 360" role="img" aria-labelledby="title desc">
+  <title id="title">AI Governance Control Room</title>
+  <desc id="desc">A dark cyan product banner for an AI governance operator console.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07131d"/><stop offset="1" stop-color="#102b3d"/></linearGradient><linearGradient id="glow" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#22d3ee"/><stop offset="1" stop-color="#60a5fa"/></linearGradient></defs>
+  <rect width="1400" height="360" rx="28" fill="url(#bg)"/><circle cx="1160" cy="86" r="180" fill="#22d3ee" opacity=".08"/><circle cx="1260" cy="280" r="130" fill="#60a5fa" opacity=".08"/>
+  <path d="M820 80h470M880 130h390M935 180h335M995 230h275" stroke="#6ee7f9" stroke-opacity=".16"/><path d="M920 80v150M1010 80v150M1100 80v150M1190 80v150" stroke="#6ee7f9" stroke-opacity=".1"/>
+  <text x="76" y="84" fill="#67e8f9" font-family="ui-monospace,monospace" font-size="16" letter-spacing="5">GOVERNANCE / OPERATIONS / EVIDENCE</text>
+  <text x="72" y="170" fill="#f3f8fc" font-family="ui-sans-serif,system-ui,sans-serif" font-size="58" font-weight="700">AI Governance</text><text x="72" y="232" fill="#f3f8fc" font-family="ui-sans-serif,system-ui,sans-serif" font-size="58" font-weight="700">Control Room</text>
+  <rect x="76" y="276" width="410" height="3" fill="url(#glow)"/><text x="76" y="316" fill="#a7c3d5" font-family="ui-sans-serif,system-ui,sans-serif" font-size="19">See coverage, evidence, gaps, and exposure in one view.</text>
+  <g fill="#67e8f9"><circle cx="915" cy="80" r="7"/><circle cx="1010" cy="130" r="7"/><circle cx="1100" cy="180" r="7"/><circle cx="1190" cy="230" r="7"/></g>
+</svg>
